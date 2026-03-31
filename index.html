@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Game Developer Portfolio – crafting interactive worlds one pixel at a time." />
+  <title>Ahmed Aziz Ghadhab — Game Developer</title>
+
+  <!-- ═══════════════════════════════════════════════
+       HOW TO CHANGE HERO TEXTS:
+       1. Change the <title> tag above
+       2. Change the hero <h1> "Alex Rivera" to your name
+       3. Change the <p class="hero-tagline"> text
+       4. Update the CV link href and Contact href
+  ════════════════════════════════════════════════ -->
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Inline SVG favicon (no external file needed) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230d0d1a'/><rect x='6' y='14' width='4' height='4' fill='%2300e676'/><rect x='10' y='10' width='4' height='4' fill='%2300e676'/><rect x='10' y='18' width='4' height='4' fill='%2300e676'/><rect x='14' y='14' width='4' height='4' fill='%2300e676'/><circle cx='22' cy='13' r='2' fill='%23ff6d00'/><circle cx='22' cy='19' r='2' fill='%237c4dff'/></svg>" />
+</head>
+<body>
+  <!-- ══════════════════ NAVIGATION ══════════════════ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" aria-label="Home">
+        <span class="pixel-icon">&#9670;</span> Home
+      </a>
+
+      <!-- Mobile hamburger toggle -->
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#about"     class="nav-link">About</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#game"      class="nav-link">Play</a></li>
+        <li><a href="#contact"   class="nav-link contact-btn">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <header id="hero" role="banner">
+    <!-- Animated canvas background (pixel rain / stars) -->
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+    <!-- Scanline overlay -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="hero-content">
+      <!-- ── Edit your name here ── -->
+      <p class="hero-pretitle">&#9654; Hello, I'm</p>
+      <div class="image-slider">
+  <div class="image-track">
+    <!-- 1st set -->
+    <img src="assets/images/me.png"  alt="Portfolio image 1">
+    <img src="assets/images/me1.jpg" alt="Portfolio image 2">
+    <img src="assets/images/me2.png" alt="Portfolio image 3">
+    <img src="assets/images/me3.png" alt="Portfolio image 4">
+    <img src="assets/images/me4.jpg" alt="Portfolio image 5">
+    <!-- 2nd set (identical) -->
+    <img src="assets/images/me.png"  alt="Portfolio image 1">
+    <img src="assets/images/me1.jpg" alt="Portfolio image 2">
+    <img src="assets/images/me2.png" alt="Portfolio image 3">
+    <img src="assets/images/me3.png" alt="Portfolio image 4">
+    <img src="assets/images/me4.jpg" alt="Portfolio image 5">
+  </div>
+</div>
+      <h1 class="hero-name">Ahmed Aziz Ghadhab</h1>
+      <h2 class="hero-title">Game Developer & Music Artrist</h2>
+     
+      <!-- ── Edit your tagline here ── -->
+      <p class="hero-tagline">
+        <span id="typewriter"></span><span class="cursor">|</span>
+      </p>
+
+      <div class="hero-cta">
+        <!-- ── Update href to your actual CV file ── -->
+        <a href="assets/cv.pdf" download class="btn btn-primary">
+          <span>&#11015;</span> Download CV
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <span>&#9993;</span> Get in Touch
+        </a>
+        <a href="#portfolio" class="btn btn-ghost">
+          <span>&#9654;</span> View Work
+        </a>
+      </div>
+
+      <!-- Pixel decoration row -->
+      <div class="hero-pixels" aria-hidden="true">
+        <span class="px-block px-1"></span>
+        <span class="px-block px-2"></span>
+        <span class="px-block px-3"></span>
+        <span class="px-block px-4"></span>
+        <span class="px-block px-5"></span>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <a href="#about" class="scroll-cue" aria-label="Scroll down">
+      <span class="scroll-arrow">&#8595;</span>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════ ABOUT ══════════════════ -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-container">
+
+        <div class="section-header reveal">
+          <span class="section-tag">// WHO AM I</span>
+          <h2 id="about-heading" class="section-title">About Me</h2>
+        </div>
+
+        <div class="about-grid">
+          <!-- Bio card -->
+          <div class="about-bio reveal">
+            
+           <div class="about-avatar" aria-hidden="true">
+              <!-- Pixel avatar built purely in CSS -->
+              <div class="pixel-avatar"></div>
+            </div>
+
+            <div class="about-text">
+              <!-- ── Edit your bio here ── -->
+              <p>
+                I'm a passionate Unity developer with <strong>2+ years</strong> of experience
+                building interactive applications and real-time systems. My work focuses on
+                character animation, avatar systems, and immersive digital experiences.
+              </p>
+              <p>
+                I enjoy solving technical challenges where code meets creativity — from
+                procedural animation and computer vision integration to composing music and
+                crafting experiences that bring virtual worlds and characters to life.
+              </p>
+              <p class="about-location">
+                <span class="pixel-dot"></span> Based in Moknine, Monastir &mdash; available worldwide.
+              </p>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="skills-panel reveal">
+            <div class="skill-group">
+              <h3 class="skill-group-title">
+                <span class="skill-icon">&#9654;</span> Engines
+              </h3>
+              <div class="skill-tags">
+                <span class="tag tag-engine">Unity</span>
+                <span class="tag tag-engine">Unreal Engine 5</span>
+               <!-- <span class="tag tag-engine">Godot 4</span>-->
+               <!-- <span class="tag tag-engine">GameMaker</span>-->
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">
+                <span class="skill-icon">&#9654;</span> Languages
+              </h3>
+              <div class="skill-tags">
+                <span class="tag tag-lang">C#</span>
+                <span class="tag tag-lang">C++</span>
+                <span class="tag tag-lang">C</span>
+                <span class="tag tag-lang">PHP</span>
+                <span class="tag tag-lang">JavaScript</span>
+                
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">
+                <span class="skill-icon">&#9654;</span> Tools
+              </h3>
+              <div class="skill-tags">
+                <span class="tag tag-tool">Maya</span>
+                <span class="tag tag-tool">Adobe Pr Pro</span>               
+                <span class="tag tag-tool">Photoshop</span>
+                <span class="tag tag-tool">Canva</span>
+                <span class="tag tag-tool">Git / GitHub</span>
+                <span class="tag tag-tool">FL Studio</span>
+                <span class="tag tag-tool">Trello / Jira/ ClickUp</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h3 class="skill-group-title">
+                <span class="skill-icon">&#9654;</span> Specialties
+              </h3>
+              <div class="skill-tags">
+                <span class="tag tag-spec">Gameplay Systems</span>
+                <span class="tag tag-spec">Game Prototyping</span>
+                <span class="tag tag-spec">Interactive Systems</span>
+                <span class="tag tag-spec">VR</span>
+                <span class="tag tag-spec">AI / Pathfinding</span>
+                <span class="tag tag-spec">Data Processing</span>
+                <span class="tag tag-spec">Music Composer</span>
+                <span class="tag tag-spec">Sound Designer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row reveal">
+       <!--   <div class="stat-card">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">Games Released</span>
+          </div> -->
+          <div class="stat-card">
+            <span class="stat-num">2+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">GameJam Winner</span>
+            
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Projects Built</span>
+          </div>
+           <div class="stat-card">
+            <span class="stat-num">20+</span>
+            <span class="stat-label">Music Composed</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════ PORTFOLIO ══════════════════ -->
+    <!--
+      HOW TO ADD A NEW PROJECT:
+      1. Drop your video (.mp4 / .webm) into  assets/videos/
+      2. Drop your thumbnail image (.png/.jpg) into  assets/images/
+      3. Open  js/projects.js  and add a new object to the PROJECTS array.
+         (See that file for detailed comments and field reference.)
+      That's it — the grid below is built entirely by JavaScript.
+    -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="section-container">
+
+        <div class="section-header reveal">
+          <span class="section-tag">// MY WORK</span>
+          <h2 id="portfolio-heading" class="section-title">Portfolio</h2>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="filter-bar reveal" role="group" aria-label="Filter by tag">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="unity">Unity</button>
+         <!-- <button class="filter-btn" data-filter="godot">Godot</button> -->
+          <button class="filter-btn" data-filter="unreal">Unreal</button>
+          <button class="filter-btn" data-filter="jam">Game Jam</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+
+        <!-- Project cards injected here by main.js -->
+        <div id="projects-grid" class="projects-grid" role="list"></div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════ MINI-GAME ══════════════════ -->
+    <section id="game" aria-labelledby="game-heading">
+      <div class="section-container">
+
+        <div class="section-header reveal">
+          <span class="section-tag">// PLAYABLE</span>
+          <h2 id="game-heading" class="section-title">Play a Mini-Game</h2>
+          <p class="section-subtitle">
+            A tiny dungeon explorer — collect all gems <span class="gem-icon">&#9670;</span>
+            to unlock the exit. Watch out for the ghost!
+          </p>
+        </div>
+
+        <div class="game-wrapper reveal">
+
+          <!-- Game canvas -->
+          <div class="game-frame">
+            <canvas id="gameCanvas" role="application" aria-label="Dungeon Explorer mini-game"></canvas>
+
+            <!-- Mobile restart button (shown only in overlay via JS) -->
+            <button id="game-restart" class="game-restart-btn" aria-label="Restart game">
+              &#9654; RESTART
+            </button>
+          </div>
+
+          <!-- Mobile D-Pad -->
+          <div id="game-controls" class="dpad" aria-label="Game controls" role="group">
+            <button class="dpad-btn dpad-up"    data-dir="up"    aria-label="Move up">&#9650;</button>
+            <div class="dpad-middle">
+              <button class="dpad-btn dpad-left"  data-dir="left"  aria-label="Move left">&#9668;</button>
+              <div class="dpad-center"></div>
+              <button class="dpad-btn dpad-right" data-dir="right" aria-label="Move right">&#9658;</button>
+            </div>
+            <button class="dpad-btn dpad-down"  data-dir="down"  aria-label="Move down">&#9660;</button>
+          </div>
+
+        </div>
+
+        <!-- Legend -->
+        <div class="game-legend reveal">
+          <div class="legend-item">
+            <span class="legend-swatch swatch-player"></span> You
+          </div>
+          <div class="legend-item">
+            <span class="legend-swatch swatch-gem"></span> Gem (+10 pts)
+          </div>
+          <div class="legend-item">
+            <span class="legend-swatch swatch-enemy"></span> Ghost (avoid!)
+          </div>
+          <div class="legend-item">
+            <span class="legend-swatch swatch-exit"></span> Exit (collect all gems first)
+          </div>
+          <div class="legend-item legend-keys">
+            &#9654; <strong>WASD</strong> or <strong>Arrow Keys</strong> to move
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════ CONTACT ══════════════════ -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="section-container">
+
+        <div class="section-header reveal">
+          <span class="section-tag">// REACH OUT</span>
+          <h2 id="contact-heading" class="section-title">Contact</h2>
+          <p class="section-subtitle">
+            Available for freelance, collaborations, and full-time roles.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Contact links -->
+          <div class="contact-links reveal">
+            <!-- ── Replace with your actual links ── -->
+            <a href="ahmedazizghadhab@gmail.com" class="contact-card">
+              <span class="contact-icon">&#9993;</span>
+              <div>
+                <strong>Email</strong>
+                <span>ahmedazizghadhab@gmail.com</span>
+              </div>
+            </a>
+
+           <!-- <a href="https://github.com/yourhandle" target="_blank" rel="noopener" class="contact-card">
+              <span class="contact-icon">&#128279;</span>
+              <div>
+                <strong>GitHub</strong>
+                <span>github.com/yourhandle</span>
+              </div>
+            </a> -->
+
+            <a href="https://www.linkedin.com/in/ahmed-aziz-ghadhab-07648b2a4/" target="_blank" rel="noopener" class="contact-card">
+              <span class="contact-icon">&#128101;</span>
+              <div>
+                <strong>LinkedIn</strong>
+                <span>linkedin.com/in/AhmedAzizGhadhab</span>
+              </div>
+            </a>
+
+            <a href="https://soundcloud.com/ahmed-aziz-ghadhab" target="_blank" rel="noopener" class="contact-card">
+              <span class="contact-icon">&#127925;</span>
+              <div>
+                <strong>SoundCloud</strong>
+                <span>soundcloud.com/ahmed-aziz-ghadhab</span>
+              </div>
+            </a>
+
+            <a href="https://www.artstation.com/Khezus" target="_blank" rel="noopener" class="contact-card">
+              <span class="contact-icon">&#127912;</span>
+              <div>
+                <strong>ArtStation</strong>
+                <span>artstation.com/Khezus</span>
+              </div>
+            </a>
+              
+            <a href="https://www.instagram.com/ahmed_aziz_ghadhab/" target="_blank" rel="noopener" class="contact-card">
+              <span class="contact-icon">&#x1F4F8;</span>
+              <div>
+                <strong>Instagram</strong>
+                <span>Instagram/Khézus</span>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Quick message form (static – points to a form service or mailto) -->
+          <form class="contact-form reveal" id="contact-form" action="mailto:alex@example.com" method="get" enctype="text/plain">
+            <div class="form-group">
+              <label for="form-name">Name</label>
+              <input type="text" id="form-name" name="name" placeholder="Your name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="form-email">Email</label>
+              <input type="email" id="form-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="form-subject">Subject</label>
+              <input type="text" id="form-subject" name="subject" placeholder="Project idea / Job offer / …" />
+            </div>
+            <div class="form-group">
+              <label for="form-message">Message</label>
+              <textarea id="form-message" name="body" rows="5" placeholder="Tell me about your project…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Send Message &#10148;
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <span class="pixel-icon">&#9670;</span> Ahmed Aziz GHADHAB
+      </div>
+      <p class="footer-copy">
+        Crafted with &#9829;  &mdash;
+        <span id="footer-year"></span>
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Top</a>
+        <a href="#about">About</a>
+        <a href="#portfolio">Work</a>
+        <a href="#game">Play</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════ PROJECT MODAL ══════════════════ -->
+  <!-- Built and injected by main.js; lives here for semantics -->
+  <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&#x2715;</button>
+      <div class="modal-media" id="modal-media"></div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span class="modal-year" id="modal-year"></span>
+          <div class="modal-tags" id="modal-tags"></div>
+        </div>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p class="modal-description" id="modal-description"></p>
+        <div class="modal-links" id="modal-links"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SCRIPTS ══════════════════ -->
+  <!--
+    Load order matters:
+    1. projects.js  – defines window.PROJECTS (your config)
+    2. game.js      – mini-game engine
+    3. main.js      – portfolio renderer + UI logic
+  -->
+  <script src="js/projects.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
