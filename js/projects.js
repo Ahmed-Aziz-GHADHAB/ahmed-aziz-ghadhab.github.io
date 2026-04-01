@@ -83,7 +83,7 @@ window.PROJECTS = [
     imagePath:   "assets/images/WithoutYou.png",
     tags:        ["unity", "jam"],
     links: [
-      { label: "itch.io page",     href: "https://yourname.itch.io/ragnarok-runners", icon: "&#127918;" }
+      //{ label: "itch.io page",     href: "https://yourname.itch.io/ragnarok-runners", icon: "&#127918;" }
     ]
   },
 
