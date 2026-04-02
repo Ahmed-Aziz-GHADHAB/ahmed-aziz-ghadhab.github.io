@@ -83,34 +83,20 @@
     const media = document.createElement('div');
     media.className = 'card-media';
 
-    if (project.videoPath) {
-      // Video element (muted autoplay on hover via JS)
-      const video = document.createElement('video');
-      video.src    = project.videoPath;
-      video.poster = project.imagePath || '';
-      video.muted  = true;
-      video.loop   = true;
-      video.playsInline = true;
-      video.preload = 'none';
-      video.setAttribute('aria-hidden', 'true');
-      media.appendChild(video);
-
-      // Hover: play / pause
-      card.addEventListener('mouseenter', function () {
-        video.play().catch(function () {});
-      });
-      card.addEventListener('mouseleave', function () {
-        video.pause();
-        video.currentTime = 0;
-      });
-
-    } else if (project.imagePath) {
+    // Cards always show the thumbnail image (YouTube videos play in modal only)
+    if (project.imagePath) {
       const img = document.createElement('img');
-      img.src   = project.imagePath;
-      img.alt   = project.title + ' screenshot';
+      img.src     = project.imagePath;
+      img.alt     = project.title + ' screenshot';
       img.loading = 'lazy';
       media.appendChild(img);
-
+    } else if (project.youtubeId) {
+      // Fallback: use YouTube's auto-generated thumbnail if no imagePath
+      const img = document.createElement('img');
+      img.src     = 'https://img.youtube.com/vi/' + project.youtubeId + '/maxresdefault.jpg';
+      img.alt     = project.title + ' thumbnail';
+      img.loading = 'lazy';
+      media.appendChild(img);
     } else {
       // Placeholder
       const ph = document.createElement('div');
@@ -126,11 +112,13 @@
     yearBadge.textContent = project.year || '';
     media.appendChild(yearBadge);
 
-    // Play overlay
-    const playOverlay = document.createElement('div');
-    playOverlay.className = 'card-play-overlay';
-    playOverlay.innerHTML = '<div class="play-icon" aria-hidden="true">&#9654;</div>';
-    media.appendChild(playOverlay);
+    // Play overlay (only shown if there's a YouTube video)
+    if (project.youtubeId) {
+      const playOverlay = document.createElement('div');
+      playOverlay.className = 'card-play-overlay';
+      playOverlay.innerHTML = '<div class="play-icon" aria-hidden="true">&#9654;</div>';
+      media.appendChild(playOverlay);
+    }
 
     card.appendChild(media);
 
@@ -222,8 +210,6 @@
   /* ══════════════════════════════════════════════════════════
      4. MODAL
   ══════════════════════════════════════════════════════════ */
-  let currentModalVideo = null;
-
   function initModal() {
     const modal    = document.getElementById('project-modal');
     const backdrop = modal.querySelector('.modal-backdrop');
@@ -238,39 +224,43 @@
   }
 
   function openModal(project) {
-    const modal       = document.getElementById('project-modal');
-    const mediaEl     = document.getElementById('modal-media');
-    const titleEl     = document.getElementById('modal-title');
-    const descEl      = document.getElementById('modal-description');
-    const yearEl      = document.getElementById('modal-year');
-    const tagsEl      = document.getElementById('modal-tags');
-    const linksEl     = document.getElementById('modal-links');
+    const modal   = document.getElementById('project-modal');
+    const mediaEl = document.getElementById('modal-media');
+    const titleEl = document.getElementById('modal-title');
+    const descEl  = document.getElementById('modal-description');
+    const yearEl  = document.getElementById('modal-year');
+    const tagsEl  = document.getElementById('modal-tags');
+    const linksEl = document.getElementById('modal-links');
 
-    // Clear previous
+    // Clear previous content
     mediaEl.innerHTML = '';
     tagsEl.innerHTML  = '';
     linksEl.innerHTML = '';
-    currentModalVideo = null;
 
-    // Media
-    if (project.videoPath) {
-      const v = document.createElement('video');
-      v.src      = project.videoPath;
-      v.poster   = project.imagePath || '';
-      v.controls = true;
-      v.autoplay = true;
-      v.muted    = false;
-      v.loop     = true;
-      v.playsInline = true;
-      mediaEl.appendChild(v);
-      currentModalVideo = v;
+    /* ── Media: YouTube iframe or fallback image ── */
+    if (project.youtubeId) {
+      const iframe = document.createElement('iframe');
+      // autoplay=1 starts the video when modal opens
+      // rel=0 hides unrelated recommendations at the end
+      iframe.src             = 'https://www.youtube.com/embed/' + project.youtubeId + '?autoplay=1&rel=0';
+      iframe.title           = project.title;
+      iframe.allow           = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.width     = '100%';
+      iframe.style.aspectRatio = '16/9';
+      iframe.style.border    = 'none';
+      iframe.style.display   = 'block';
+      mediaEl.appendChild(iframe);
+
     } else if (project.imagePath) {
       const img = document.createElement('img');
       img.src   = project.imagePath;
       img.alt   = project.title;
+      img.style.width = '100%';
       mediaEl.appendChild(img);
     }
 
+    // Text fields
     titleEl.textContent = project.title;
     descEl.textContent  = project.description;
     yearEl.textContent  = project.year || '';
@@ -286,9 +276,9 @@
     // Links
     (project.links || []).forEach(function (link) {
       const a = document.createElement('a');
-      a.href   = link.href;
-      a.target = '_blank';
-      a.rel    = 'noopener';
+      a.href      = link.href;
+      a.target    = '_blank';
+      a.rel       = 'noopener';
       a.className = 'btn btn-outline';
       a.innerHTML = (link.icon ? link.icon + ' ' : '') + link.label;
       linksEl.appendChild(a);
@@ -304,11 +294,12 @@
   }
 
   function closeModal() {
-    const modal = document.getElementById('project-modal');
-    if (currentModalVideo) {
-      currentModalVideo.pause();
-      currentModalVideo = null;
-    }
+    const modal   = document.getElementById('project-modal');
+    const mediaEl = document.getElementById('modal-media');
+
+    // Removing the iframe src stops the YouTube video & audio immediately
+    mediaEl.innerHTML = '';
+
     modal.hidden = true;
     document.body.style.overflow = '';
   }
@@ -406,7 +397,6 @@
     let phraseIdx = 0;
     let charIdx   = 0;
     let deleting  = false;
-    let paused    = false;
 
     function tick() {
       const phrase = TYPEWRITER_PHRASES[phraseIdx];
@@ -415,8 +405,7 @@
         el.textContent = phrase.slice(0, charIdx + 1);
         charIdx++;
         if (charIdx === phrase.length) {
-          paused = true;
-          setTimeout(function () { paused = false; deleting = true; tick(); }, 2200);
+          setTimeout(function () { deleting = true; tick(); }, 2200);
           return;
         }
       } else {
